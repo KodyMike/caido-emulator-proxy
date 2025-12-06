@@ -74,6 +74,8 @@ Open any HTTPS site in emulator browser — traffic should appear in Caido's HTT
 adb shell settings put global http_proxy :0
 
 adb reverse --remove-all
+# Note: This removes localhost access from emulator. Use 10.0.2.2 to reach host machine instead.
+# Example: http://10.0.2.2:8000 instead of http://127.0.0.1:8000
 ```
 
 ## Quick Reference
