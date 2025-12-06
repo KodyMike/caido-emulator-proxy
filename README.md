@@ -12,16 +12,31 @@ Intercept Android traffic using Caido proxy with an Android emulator.
 ```bash
 sudo snap install androidsdk
 
-androidsdk "platform-tools" "emulator" "platforms;android-34" "system-images;android-34;google_apis;x86_64"
+androidsdk "platform-tools" "emulator" "cmdline-tools;latest" "platforms;android-34" "system-images;android-34;google_apis;x86_64"
 # If you need Play Store (not rootable): "system-images;android-34;google_apis_playstore;x86_64"
+```
+
+Add tools to PATH:
+```bash
+sudo tee /etc/profile.d/androidsdk.sh << 'EOF'
+export PATH="$PATH:$HOME/AndroidSDK/emulator:$HOME/AndroidSDK/platform-tools:$HOME/AndroidSDK/cmdline-tools/latest/bin"
+EOF
+```
+
+Log out and back in, then verify:
+```bash
+which emulator
+which adb
+which avdmanager
 ```
 
 ## Step 2: Create and Launch Emulator
 
 ```bash
 avdmanager create avd -n caido_test -k "system-images;android-34;google_apis;x86_64"
+# Press Enter when asked for custom hardware profile
 
-emulator -avd caido_test &
+emulator @caido_test &
 
 adb devices
 # Expected: List of devices attached
