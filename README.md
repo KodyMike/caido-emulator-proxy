@@ -36,6 +36,9 @@ which avdmanager
 avdmanager create avd -n caido_test -k "system-images;android-34;google_apis;x86_64"
 # Press Enter when asked for custom hardware profile
 
+# Enable hardware keyboard (optional)
+echo "hw.keyboard=yes" >> ~/.android/avd/caido_test.avd/config.ini
+
 emulator @caido_test &
 
 adb devices
@@ -59,6 +62,7 @@ adb shell settings get global http_proxy
 
 1. In emulator browser, go to `http://127.0.0.1:8080/ca.crt`
 2. Install via **Settings > Security and privacy > Encryption and Credentials > Install a certificate > CA certificate > INSTALL ANYWAY > Select cert from Recent**
+3. Verify cert is installed: **Settings > Security and privacy > Encryption and Credentials > Trusted credentials > USER** — your cert should be listed
 
 ## Step 5: Test
 
